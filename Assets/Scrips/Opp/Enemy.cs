@@ -4,15 +4,31 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+  
+    protected float speed;
+    protected Rigidbody2D rb;
+    protected Sprite sprite;
+
+    public Enemy(float speed, Rigidbody2D rb, Sprite sprite)
     {
-        
+        this.speed = speed;
+        this.rb = rb;
+        this.sprite = sprite;
     }
 
-    // Update is called once per frame
-    void Update()
+    public Sprite GetSprite()
     {
-        
+        return sprite;
+    }
+
+    public abstract void Move();
+    
+    
+    
+
+    public virtual void Hit()
+    {
+        // No hace nada por defecto
     }
 }
+
