@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public abstract class Enemy 
 {
   
     protected float speed;
@@ -28,7 +28,7 @@ public class Enemy : MonoBehaviour
 
     public virtual void Hit()
     {
-        // No hace nada por defecto
+        // Vacio
     }
 }
 

@@ -6,46 +6,25 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    private Vector2 dir;
-    public float speed = 10f, returnTime, destroyTime = 5f;
-    private float currentTime;
-    private Rigidbody2D _rb;
-    private Transform returnTransform;
-    // Start is called before the first frame update
-    void Start()
+    public float speed = 10f;
+    public float lifeTime = 3f;
+    private Vector2 direction;
+
+    public void SetDirection(Vector2 dir)
     {
-        _rb = GetComponent<Rigidbody2D>();  
-        Destroy(gameObject,destroyTime);
+        direction = dir.normalized;
+        Destroy(gameObject, lifeTime); // Destruye la bala despues de cierto tiempo
     }
 
-    // Update is called once per frame
     void Update()
     {
-        currentTime += Time.deltaTime;
-        if (currentTime >= returnTime) 
-        {
-            Vector2 directionToReturn = returnTransform.position - transform.position;
-            _rb.velocity = directionToReturn.normalized * speed;
-        
-        }
-        else
-        {
-            _rb.velocity = dir * speed;
-
-
-        }
-    
+        transform.Translate(direction * speed * Time.deltaTime);
     }
-    public void SetDir(Vector2 nDir)
+
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        dir = nDir; 
-    }
-    public void SetReturnTransform(Transform t)
-    { 
         
-        returnTransform = t;
-    
-    
+        Destroy(gameObject); // destruye la bala al chocar
     }
 
 
